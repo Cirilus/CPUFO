@@ -1,0 +1,25 @@
+[tool.poetry]
+name = "cp"
+version = "0.1.0"
+description = ""
+authors = ["kirill <shkolenko02-03-2004@mail.ru>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+fastapi = {extras = ["all"], version = "^0.103.0"}
+alembic = "^1.11.3"
+loguru = "^0.7.0"
+pytest = "^7.4.0"
+numpy = "^1.26.4"
+pillow = "^10.3.0"
+pandas = "^2.2.2"
+pytesseract = "^0.3.10"
+scikit-image = "^0.23.1"
+llama-cpp-python = "^0.2.61"
+opencv-python = "^4.9.0.80"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
