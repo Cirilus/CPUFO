@@ -10,7 +10,7 @@ RUN pip install poetry
 
 RUN apt update
 
-RUN apt install -y tesseract-ocr tesseract-ocr-rus
+RUN apt install -y tesseract-ocr tesseract-ocr-rus libglu1-mesa-dev
 
 RUN poetry config virtualenvs.create false \
     && poetry install --no-interaction --no-ansi
