@@ -11,3 +11,5 @@ env.bak/
 venv.bak/
 
 ml/models/*
+ml/test_files
+ml/test.py
