@@ -8,7 +8,7 @@ COPY pyproject.toml poetry.lock /app/
 
 RUN pip install poetry
 
-sudo apt install -y tesseract-ocr tesseract-ocr-rus
+RUN apt install -y tesseract-ocr tesseract-ocr-rus
 
 RUN poetry config virtualenvs.create false \
     && poetry install --no-interaction --no-ansi
