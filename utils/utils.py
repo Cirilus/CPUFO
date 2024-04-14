@@ -18,9 +18,12 @@ def str2json(string: str) -> str:
     json_pattern = r'({[^{}]+})'
     json_match = re.search(json_pattern, string)
 
-    if json_match:
-        json_str = json_match.group()
-        json_obj = json.loads(json_str)
-        return json_obj
+    try:
+        if json_match:
+            json_str = json_match.group()
+            json_obj = json.loads(json_str)
+            return json_obj
+    except Exception as e:
+        raise ValueError(f"error json loading: {string}")
 
     raise ValueError(f"there is no json in str {string}")
