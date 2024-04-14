@@ -47,19 +47,15 @@ async def get_report(req: RecognizeRequest):
 
     pipeline_json, rules = result_pipeline([back_side, front_side])
 
-    try:
-        pipeline_json = str2json(pipeline_json)
+    pipeline_json = str2json(pipeline_json)
 
-        df = pd.DataFrame(pipeline_json)
-        buffer = io.BytesIO()
-        with pd.ExcelWriter(buffer) as writer:
-            df.to_excel(writer, index=False)
+    df = pd.json_normalize(pipeline_json)
+    buffer = io.BytesIO()
+    with pd.ExcelWriter(buffer) as writer:
+        df.to_excel(writer)
 
-        return StreamingResponse(
-            io.BytesIO(buffer.getvalue()),
-            media_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
-            headers={"Content-Disposition": f"attachment; filename=data.csv"}
-        )
-
-    except Exception as e:
-        raise ValueError(f"error json dumping: {e}")
+    return StreamingResponse(
+        io.BytesIO(buffer.getvalue()),
+        media_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+        headers={"Content-Disposition": f"attachment; filename=data.csv"}
+    )

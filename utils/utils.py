@@ -14,7 +14,7 @@ def base642nparray(base64_image: str):
     return np.array(image)
 
 
-def str2json(string: str) -> str:
+def str2json(string: str) -> dict:
     json_pattern = r'({[^{}]+})'
     json_match = re.search(json_pattern, string)
 
