@@ -18,9 +18,4 @@ RUN poetry config virtualenvs.create false \
 
 COPY . /app/
 
-RUN export FORCE_CMAKE=1
-RUN export CMAKE_ARGS=-DLLAMA_CUBLAS=on
-
-RUN poetry run pip install llama-cpp-python --upgrade --force-reinstall --no-cache-dir
-
 CMD ["poetry", "run", "uvicorn", "app:app", "--host", "0.0.0.0", "--port", "8000"]
