@@ -6,7 +6,15 @@ ENV PYTHONUNBUFFERED 1
 WORKDIR /app
 COPY requirements.txt /app/
 
-RUN apt update
+
+
+RUN apt-get update && apt-get install -y software-properties-common && \
+    wget https://developer.download.nvidia.com/compute/cuda/12.3.1/local_installers/cuda-repo-debian12-12-3-local_12.3.1-545.23.08-1_amd64.deb && \
+    dpkg -i cuda-repo-debian12-12-3-local_12.3.1-545.23.08-1_amd64.deb && \
+    cp /var/cuda-repo-debian12-12-3-local/cuda-*-keyring.gpg /usr/share/keyrings/ && \
+    add-apt-repository contrib && \
+    apt-get update && \
+    apt-get -y install cuda-toolkit-12-3
 
 RUN apt install -y tesseract-ocr tesseract-ocr-rus libglu1-mesa-dev
 
