@@ -18,6 +18,8 @@ RUN apt-get update && apt-get install -y software-properties-common && \
 
 RUN apt install -y tesseract-ocr tesseract-ocr-rus libglu1-mesa-dev
 
+sudo apt install -y gcc-11 g++-11
+
 RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . /app/
