@@ -1,3 +1,5 @@
+from loguru import logger
+
 from ml.core.document_conversion import extract_images
 from ml.llm.utiils import pipeline
 from ml.core.utilities import preprocess_image
@@ -20,13 +22,15 @@ def get_data(files: list[np.array] = None):
 def result_pipeline(files: list[np.array]) -> str:
     if len(files) == 1:
         files = [files]
-
+    logger.info("getting data")
     preprocess_files = []
     for file in files:
         preprocess_files.append(get_data(file))
-
+    logger.info("extracting images")
     images = extract_images(files=preprocess_files)
+    logger.info("generate output text")
     text_from_ocr = generate_output_text(images)
+    logger.info("starting pipeline")
     rules, json = pipeline(text_from_ocr)
     return json, rules
 
