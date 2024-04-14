@@ -29,7 +29,7 @@ async def get_answer(req: RecognizeRequest):
         product = Product().parse_obj(pipeline_json)
 
     except Exception as e:
-        raise ValueError(f"error json dumping: {e}")
+        raise ValueError(f"error json dumping: {e}, pipeline_json: {pipeline_json}")
 
     return RecognizeResponse(
         product=product,
@@ -52,7 +52,7 @@ async def get_report(req: RecognizeRequest):
     df = pd.json_normalize(pipeline_json)
     buffer = io.BytesIO()
     with pd.ExcelWriter(buffer) as writer:
-        df.to_excel(writer)
+        df.to_excel(writer, index=False)
 
     return StreamingResponse(
         io.BytesIO(buffer.getvalue()),
