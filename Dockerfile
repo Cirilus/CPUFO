@@ -10,7 +10,7 @@ RUN apt update
 
 RUN apt install -y tesseract-ocr tesseract-ocr-rus libglu1-mesa-dev
 
-RUN pip install -r --no-cache-dir requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . /app/
 
