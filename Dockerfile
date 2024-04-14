@@ -20,5 +20,5 @@ COPY . /app/
 RUN export FORCE_CMAKE=1
 RUN export CMAKE_ARGS=-DLLAMA_CUBLAS=on
 
-RUN  poetry add llama-cpp-python
+RUN  poetry install --force llama-cpp-python
 CMD ["poetry", "run", "uvicorn", "app:app", "--host", "0.0.0.0", "--port", "8000"]
