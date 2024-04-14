@@ -17,6 +17,5 @@ RUN poetry config virtualenvs.create false \
 
 COPY . /app/
 
-RUN CMAKE_ARGS="-DLLAMA_CUBLAS=on" poetry add llama-cpp-python
-
+RUN CMAKE_ARGS="-DLLAMA_CUBLAS=on" FORCE_CMAKE=1 poetry add llama-cpp-python
 CMD ["poetry", "run", "uvicorn", "app:app", "--host", "0.0.0.0", "--port", "8000"]
